@@ -1,0 +1,103 @@
+footer{
+    /* margin-right: 1%;
+    margin-left: 1%; */
+    background-color: transparent;
+    border-radius: 6px 6px 10px 10px;
+	box-shadow: 5px 20px 50px #000;
+    height: fit-content;
+    margin-bottom: 0%;
+}
+
+.footer-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Create a 4-column grid with equal widths */
+  gap: 0px; 
+  height: fit-content;
+  margin-left: 0.5%;
+  align-items: center;
+  justify-items: center;
+}
+
+.footer-bottom-grid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: 0.5%;
+}
+
+.footer-title{
+    align-self: center;
+    color: white;
+    font-family: 'Racing Sans One', cursive;
+    font-size: x-large;
+}
+
+.footer-social{
+    height: fit-content;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 0;
+}
+
+.numberPhone{
+    align-self: center;
+    margin-bottom: 0;
+    font-size: medium;
+}
+
+.iconsHolder{
+    border-radius: 50%;
+}
+
+.icons {
+    font-size: 1.4rem;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+.footer-follow-title{
+    align-self: center;
+    /* margin-bottom: 0; */
+    color: #573b8a;
+    font-family: 'Racing Sans One', cursive;
+}
+
+.footer-call-title{
+    align-self: center;
+    color: #573b8a;
+    font-family: 'Racing Sans One', cursive;
+}
+
+.footer-bottom-text{
+    margin:0.1%;
+    font-size: 10.2px;
+}
+
+.footer-devider{
+    margin-bottom: 0%;
+    height: 0.1px;
+}
+
+.subscribe-email{
+    text-align: center;
+    height: 1%;
+    background: transparent;
+    border-bottom: 1.3px solid #c9b1f6;
+    border-radius: 3px;
+}
+
+.subscribe-button{
+    height: 1%;
+    /* margin-bottom: 0; */
+    background: transparent;
+    font-size: small;
+    color: #c9b1f6;
+    border-bottom: 1.3px solid #c9b1f6;
+    border-radius: 3px;
+}
+.subscribe-form{
+    margin-bottom: 0;
+    height: fit-content;
+}

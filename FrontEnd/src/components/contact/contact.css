@@ -1,0 +1,95 @@
+.conatct-form {
+    padding: 0rem;
+    margin: 20%;
+    margin-top: 2rem;
+    /* margin-right: auto;
+    margin-left: auto; */
+    max-width: 75%;
+    /* height: fit-content; */
+    background-color: transparent;
+    border-radius: 8px 8px 10px 10px;
+	box-shadow: 5px 5px 20px #000;
+  }
+  
+
+  
+  .contact-form-group {
+    padding: 0;
+    border: 0;
+  }
+  .contact-form-group + .contact-form-group {
+    margin-top: 0rem;
+  }
+  
+  .contact-label{
+    /* display: inline-block; */
+    /* margin-bottom: ; */
+    margin-top: 0%;
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+    font-size: .75rem;
+    text-transform: uppercase;
+    touch-action: manipulation;
+  }
+  
+  .form-input{
+    margin-top: -10%;
+    color: #000;
+    background-color: transparent;
+    border: 1px solid #080707;
+    border-radius: 3px;
+  }
+  .contact-form-textarea {
+    display: block;
+    margin-top: -10%;
+    margin-left: 15%;
+    /* padding: .5rem .75rem; */
+    width: 70%;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #060606;
+    background-color: transparent;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+  }
+  .form-input:focus,
+  .contact-form-textarea:focus {
+    outline: 0;
+    border-bottom-color: #c9b1f6;
+  }
+  
+  .contact-form-textarea {
+    resize: vertical;
+  }
+  
+  .contact-btn {
+    /* display: inline-block; */
+    /* padding: .75rem 1rem;
+    margin-top: 1.618rem; */
+    font-weight: 400;
+    height: fit-content;
+    margin-left: 31%;
+    text-align: center;
+    width: 40%;
+    text-transform: uppercase;
+    color: #fff;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 2px solid #573b8a;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+  }
+  .contact-btn:focus, .contact-btn:hover {
+    background-color: #573b8a;
+    box-shadow: 0 18px 35px rgba(50, 50, 93, 0.1), 0 8px 15px rgba(0, 0, 0, 0.07);
+  }
+  .contact-btn:focus {
+    outline: 0;
+  }
+  

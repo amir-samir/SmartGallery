@@ -1,0 +1,148 @@
+.profileNavbar-wrapper{
+  width: 100%;
+  /* height: 100%; */
+}
+
+.profileNavbar-list-profile, 
+.navbar-profile-address,
+.navbar-profile-list-settings,
+.profile-navbar-list-logout{
+    color: #7f8db0;
+    font-size: medium;
+}
+
+.profile-navbar-logo-title{
+  font-family: 'Racing Sans One', cursive;
+  font-size: 1em;
+  color: #f9f8fb;
+}
+
+.profileNavbar{
+  /* background: transparent; */
+  background-color: #000000;
+  background-image: linear-gradient(115deg, #7f8c8d 0%,#000000 74%);
+  box-shadow: 2.95px 2.95px 14px black;
+  border-radius: 2px 2px 2px 2px;
+  /* width: 100%; */
+  height: 40px;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* box-shadow: 0 1px 2px rgba(0,0,0,0.1); */
+  font-size: 28px;
+  position: relative;
+}
+
+.profileNavbar-right{
+  display: flex;
+}
+
+.navbar-profile-image{
+    margin-top: 1.5%;
+    width: 35px;
+}
+.navbar-profile{
+  position: relative;
+}
+
+.navbar-profile-icon-wrap{
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   color: #573b8a;
+   font-size: 0.7em;
+}
+
+.navbar-profile-icon-wrap:hover,
+.navbar-profile.active .navbar-profile-icon-wrap
+{
+    color: #573b8a;
+ }
+
+.navbar-profile.active .profile_dd{
+  display: block;
+}
+
+.profile_dd{
+   position: absolute;
+   top: 48px;
+   right: -10px;
+   user-select: none;
+   background: #fff;
+   border: 1px solid #c7d8e2;
+   width: 230px;
+   height: auto;
+   display: none;
+   border-radius: 3px;
+   box-shadow: 10px 10px 35px rgba(0,0,0,0.125),
+              -10px -10px 35px rgba(0,0,0,0.125);
+}
+
+.profile_dd:before{
+   content: "";
+   position: absolute;
+   top: -20px;
+   right: 10px;
+   border: 10px solid;
+   border-color: transparent transparent #fff transparent;
+}
+
+.navbar-profile-name{
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 10px;
+    color: #f9f8fb;
+    font-family: 'Racing Sans One', cursive;
+    text-decoration: none;
+    margin-top: 2%;
+}
+
+.profile_li{
+    border-bottom: 1px solid #f1f2f4;
+}
+
+.profileNavbar-list-profile, .navbar-profile-address
+.navbar-profile-list-settings, .profile-navbar-list-logout
+{
+    display: block;
+    /* padding: 15px 35px; */
+    position: relative;
+    font-size: medium;
+}
+
+.profileNavbar-list-profile:hover, .navbar-profile-address:hover,
+.navbar-profile-list-settings:hover, .profile-navbar-list-logout:hover
+{
+  color: #573b8a;
+  background: #f0f5ff;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.profileNavbar-list-profile:hover{
+    background: transparent;
+    cursor: default;
+    color: #573b8a;
+}
+
+.navbar-profile-list-btn{
+    height: 25px;
+    /* padding: 1px 1px; */
+    color: #f0f5ff;
+    font-size: medium;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    background: #573b8a;
+    width: 125px;
+    margin: 0px auto 2px;
+}
+
+.navbar-profile-list-btn:hover{
+    background: #6593e4;
+}
+
+
+

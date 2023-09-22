@@ -1,0 +1,110 @@
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .navbar {
+    height: 40px;
+    background-color: #000000;
+    background-image: linear-gradient(115deg, #7f8c8d 0%,#000000 74%);
+    box-shadow: 4.95px 4.95px 24px black;
+    border-radius: 2px 2px 2px 2px;
+    position: relative;
+  }
+
+  .logo-img{
+    width: 50px;
+    height: 100%;
+  }
+  .navItem{
+    color: #fef7e5;
+  }
+  
+  .logo {
+    font-family: 'Racing Sans One', cursive;
+    font-size: 1em;
+  }
+  
+  .menu-icon {
+    display: none;
+  }
+  
+  .nav-elements {
+  }
+  
+  .nav-elements ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+  }
+  
+  .nav-elements ul li:not(:last-child) {
+    margin-right: 60px;
+  }
+  
+  .nav-elements ul a {
+    font-size: 14px;
+    font-weight: 400;
+    color: #f9f8fb;
+    font-family: 'Racing Sans One', cursive;
+    text-decoration: none;
+  }
+  
+  .nav-elements ul a.active {
+    color: #574c4c;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  .nav-elements ul a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #040404;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-elements ul li:not(:last-child) {
+      margin-right: 30px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .menu-icon {
+      display: block;
+      cursor: pointer;
+    }
+  
+    .nav-elements {
+      position: absolute;
+      left: 0;
+      top: 0px;
+      background-color: #060606;
+      width: 0px;
+      height: fit-content;
+      transition: all 0.3s ease-in;
+      overflow: hidden;
+    }
+  
+    .nav-elements.active {
+      width: 150px;
+    }
+  
+    .nav-elements ul {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .nav-elements ul li {
+      margin-right: unset;
+      margin-top: 22px;
+    }
+  }
