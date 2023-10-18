@@ -1,19 +1,72 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import RoomImagesHolder from '../roomImagesHolder/roomImagesHolder';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import './imageUploader.css'
 
 
 
 function ImageUploader() {
 	const [fileSelected, setFileSelected] = useState(false);
+	const [selectedImages, setSelectedImages] = useState<File[]>([]);
+
+	//Handle file input change
+	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const files = Array.from(e.target.files || []);
+		setSelectedImages([...selectedImages, ...files]);
+		console.log(selectedImages);
+	}
 	const handleChooseFileClick = () => {
 		const fileInput = document.getElementById('file');
 		if (fileInput) {
 		  fileInput.click(); // Programmatically trigger a click event on the hidden input
 		}
 	  };
+	  const handleImageDelete = (index: number) => {
+		const updatedImages = [...selectedImages];
+		updatedImages.splice(index, 1); // Remove the image at the specified index
+		setSelectedImages(updatedImages);
+	  };
 	  const handleFileInputChange = (e:any) => {
 		// Check if a file has been selected
 		setFileSelected(e.target.files.length > 0);
+	  };
+
+	  const handleUpload = async () => {
+		if (selectedImages.length === 0) {
+		  // No images to upload
+		  return;
+		}
+	  
+		const formData = new FormData();
+		selectedImages.forEach((image, index) => {
+		  formData.append(`images[${index}]`, image);
+		});
+	  
+		try {
+		  const response = await fetch('http://localhost:5083/upload', {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+			method: 'POST',
+			body: formData,
+		  });
+	  
+		  if (response.ok) {
+			// Handle success, e.g., show a success message or perform any other action
+			const responseData = await response.json();
+			console.log('Upload success:', responseData.message);
+	  
+			// Clear the selected images
+			setSelectedImages([]);
+		  } else {
+			// Handle error, e.g., display an error message
+			console.error('Upload error:', response.statusText);
+		  }
+		} catch (error) {
+		  // Handle error, e.g., display an error message
+		  console.error('Upload error:', error);
+		}
 	  };
 	useEffect(() => {
 		return () => {
@@ -64,12 +117,38 @@ function ImageUploader() {
 				<p className="modal__message">Select a file to upload from your computer or device.</p>
 				<div className="modal__actions">
 					<button className="modal__button modal__button--upload" type="button" data-action="file" onClick={handleChooseFileClick}>Choose File</button>
-					<input className='fileInputImageUploader' id="file" type="file" onChange={handleFileInputChange} hidden/>
-	  					
+					<input className='fileInputImageUploader' id="file" type="file" name='upload' multiple onChange={handleFileChange} hidden/>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div className="modal__body">
+		<div className='selectedImagesContainer'>
+		{selectedImages.map((image, index) => (
+			<div className='selected-item'>
+			<img
+			className='selected-image'
+            key={index}
+            src={URL.createObjectURL(image)}
+            alt={`Uploaded ${index}`}
+            width="150"
+            height="150"
+          />
+			<div className='selected-image-info'>
+				<ul className='selected-image-list'>
+					<li className='selected-image-delete'>
+						<span className='selected-image-hidden-delete' onClick={() => handleImageDelete(index)}>
+							<FontAwesomeIcon icon={faTrashAlt} aria-hidden="true" />
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+        ))}
+		<button className='uploadButton' onClick={handleUpload}> upload </button>
+		</div>
+       
+      </div>
 </div>
 }
 export default ImageUploader
