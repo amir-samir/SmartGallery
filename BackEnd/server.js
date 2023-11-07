@@ -105,6 +105,18 @@ app.get("/getImages", async (req, res) => {
   }
 });
 
+app.delete("/deleteImage/:id", async (req, res) => {
+  try {
+    const imageId = req.params.id;
+    // Delete the image from MongoDB based on the imageId.
+    await Images.deleteOne({ _id: imageId });
+    res.send({ status: "ok" });
+  } catch (error) {
+    console.error("Error deleting image:", error);
+    res.status(500).send({ status: "error", message: "Failed to delete the image" });
+  }
+});
+
  
 
   

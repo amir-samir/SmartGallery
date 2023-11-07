@@ -14,6 +14,17 @@ interface Image {
 function RoomImagesHolder() {
   const [images, setImages] = useState<Image[]>([]);
 
+  const deleteImage = async (_id: any) => {
+    try {
+      await fetch(`http://localhost:5083/deleteImage/${_id}`, {
+        method: "DELETE",
+      });
+      // You can also remove the image from your state to reflect the deletion.
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
+  };
+
   useEffect(() => {
     async function getImages() {
       try {
@@ -49,7 +60,7 @@ function RoomImagesHolder() {
             <div className='room-gallery-image-info'>
               <ul className='room-gallery-image-info-list'>
                 <li className='room-gallery-image-delete'>
-                  <span className='hidden-delete-icon'>
+                  <span className='hidden-delete-icon' onClick={() => deleteImage(data._id)}>
                   <FontAwesomeIcon icon={faTrashAlt} aria-hidden="true" />
                   </span>
                 </li>
