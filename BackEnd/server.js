@@ -7,13 +7,15 @@ var mongoose = require("mongoose");
 const Grid = require('gridfs-stream');
 const GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
 
+require("./models/PhotosModel");
+const Images = mongoose.model("UploadedImages");
 
 
 
 
 var app = Express();
 app.use(cors());
-app.use(Express.json())
+app.use(Express.json({ limit: '300mb' }))
 
 
 var CONNECTION_STRING = "mongodb+srv://FotoAppAdmin:0599455465s@Fotoappcluster.eftu1jh.mongodb.net/AppUsers";
@@ -31,60 +33,13 @@ db.once('open', () => {
   app.use(upload.array('images')); // Multer middleware
 });
 
-// Set up Multer for file uploads
-// Set up multer and GridFS storage
-const storage = new GridFsStorage({
-  url: CONNECTION_STRING,
-  file: (req, file) => {
-    return {
-      filename: file.originalname,
-      bucketName: 'uploads', // Must match the collection name in GridFS
-    };
-  },
-});
+
 
 const upload = multer({ dest: 'uploads/' });
 
-app.post("/upload", upload.array('images'), async (req, res) => {
-  try {
-    // Handle uploaded files
-    // You can access the uploaded files in req.files array
-    console.log(req.files);
 
-    // Save each uploaded file to MongoDB
-    const fileIds = [];
-    for (const file of req.files) {
-      const fileId = await saveFileToMongoDB(file);
-      fileIds.push(fileId);
-    }
 
-    // Respond with success message and file IDs
-    res.status(200).json({ message: 'Images uploaded successfully', fileIds });
-  } catch (error) {
-    console.error('Error uploading files:', error);
-    res.status(500).json({ error: 'Error uploading files' });
-  }
-});
 
-// Function to save a file to MongoDB using GridFS
-async function saveFileToMongoDB(file) {
-  return new Promise((resolve, reject) => {
-    const writeStream = gfs.createWriteStream({
-      filename: file.originalname,
-    });
-
-    writeStream.on('close', (file) => {
-      resolve(file._id);
-    });
-
-    writeStream.on('error', (error) => {
-      reject(error);
-    });
-
-    writeStream.write(file.buffer);
-    writeStream.end();
-  });
-}
 
 const UserModel = require("./models/UserModel");
 
@@ -122,6 +77,33 @@ mongoose
   console.log("database connected");
  })
 .catch((err) => console.log(err));
+
+app.post("/uploadImagesBase", async (req, res) => {
+  const { images } = req.body;
+  try {
+    for (let i = 0; i < images.length; i++) {
+      await Images.create({
+        imageName: `image${i + 1}`,
+        category: "firstCategory",
+        image: images[i],
+      });
+    }
+
+    res.send({ status: "ok" });
+  } catch (error) {
+    res.send({ status: "error", data: error });
+  }
+});
+
+app.get("/getImages", async (req, res) => {
+  try {
+    const images = await Images.find({});
+    res.send({ status: "ok", data: images });
+  } catch (error) {
+    console.error("Error fetching images:", error);
+    res.status(500).send({ status: "error", message: "Failed to fetch images" });
+  }
+});
 
  
 

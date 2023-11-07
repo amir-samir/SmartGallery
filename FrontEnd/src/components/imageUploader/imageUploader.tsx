@@ -9,72 +9,82 @@ import './imageUploader.css'
 function ImageUploader() {
 	const [fileSelected, setFileSelected] = useState(false);
 	const [selectedImages, setSelectedImages] = useState<File[]>([]);
+	const [image, setImage] = useState<string[]>([]);
 
-	//Handle file input change
+	//Handle file input change and save the images in an Array
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const files = Array.from(e.target.files || []);
 		setSelectedImages([...selectedImages, ...files]);
 		console.log(selectedImages);
 	}
+	//Click the hidden Input button
 	const handleChooseFileClick = () => {
 		const fileInput = document.getElementById('file');
 		if (fileInput) {
 		  fileInput.click(); // Programmatically trigger a click event on the hidden input
 		}
 	  };
+
+	//Handle deleting an image before uploading
 	  const handleImageDelete = (index: number) => {
 		const updatedImages = [...selectedImages];
 		updatedImages.splice(index, 1); // Remove the image at the specified index
+		image.splice(index, 1);
 		setSelectedImages(updatedImages);
 	  };
-	  const handleFileInputChange = (e:any) => {
-		// Check if a file has been selected
-		setFileSelected(e.target.files.length > 0);
-	  };
 
-	  const handleUpload = async () => {
-		if (selectedImages.length === 0) {
-		  // No images to upload
-		  return;
+	//Convert images to Base64 to save them in MongoDB (Not the best Solution but its enough good for a demo Project)
+	  function convertToBase64(e: any) {
+		handleFileChange
+		console.log(e);
+	  
+		const files = e.target.files;
+		const imageArray: string[] = [];
+	  
+		for (let i = 0; i < files.length; i++) {
+		  const reader = new FileReader(); // Create a new FileReader instance for each file
+	  
+		  reader.onload = () => {
+			console.log(reader.result);
+			imageArray.push(reader.result as string);
+	  
+			if (imageArray.length === files.length) {
+			  // All images have been processed, update the state
+			  setImage(imageArray);
+			}
+		  };
+	  
+		  reader.onerror = error => {
+			console.log("Error: ", error);
+		  };
+	  
+		  reader.readAsDataURL(files[i]); // Start reading the current file
 		}
+	  }
 	  
-		const formData = new FormData();
-		selectedImages.forEach((image, index) => {
-		  formData.append(`images[${index}]`, image);
-		});
-	  
-		try {
-		  const response = await fetch('http://localhost:5083/upload', {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-			method: 'POST',
-			body: formData,
-		  });
-	  
-		  if (response.ok) {
-			// Handle success, e.g., show a success message or perform any other action
-			const responseData = await response.json();
-			console.log('Upload success:', responseData.message);
-	  
-			// Clear the selected images
-			setSelectedImages([]);
-		  } else {
-			// Handle error, e.g., display an error message
-			console.error('Upload error:', response.statusText);
-		  }
-		} catch (error) {
-		  // Handle error, e.g., display an error message
-		  console.error('Upload error:', error);
-		}
-	  };
-	useEffect(() => {
-		return () => {
-		  // Cleanup code if needed
-		  
-		  
-		};
-	  }, []);
+	//Fetch the POST Method to upload the images using the Server
+	  function uploadImages() {
+		fetch("http://localhost:5083/uploadImagesBase", {
+		  method: "POST",
+		  headers: {
+			"Content-Type": "application/json",
+			Accept: "application/json",
+			"Access-Control-Allow-Origin": "*",
+		  },
+		  body: JSON.stringify({
+			images: image,
+		  }),
+		})
+		  .then((res) => res.json())
+		  .then((data) => console.log(data));
+		setSelectedImages([]);
+	  }
+
+	  //Handle file Input changes
+	  function handleImageInputChanges(e: any) {
+		handleFileChange(e);
+		convertToBase64(e);  
+	  }
 	  
     return <div id="upload" className="modal" data-state="0" data-ready="false">
 	<div className="modal__header">
@@ -117,7 +127,7 @@ function ImageUploader() {
 				<p className="modal__message">Select a file to upload from your computer or device.</p>
 				<div className="modal__actions">
 					<button className="modal__button modal__button--upload" type="button" data-action="file" onClick={handleChooseFileClick}>Choose File</button>
-					<input className='fileInputImageUploader' id="file" type="file" name='upload' multiple onChange={handleFileChange} hidden/>
+					<input className='fileInputImageUploader' id="file" type="file" name='upload' multiple onChange={handleImageInputChanges} hidden/>
 				</div>
 			</div>
 		</div>
@@ -145,7 +155,7 @@ function ImageUploader() {
 			</div>
 		</div>
         ))}
-		<button className='uploadButton' onClick={handleUpload}> upload </button>
+		<button className='uploadButton' onClick={uploadImages}> upload </button>
 		</div>
        
       </div>

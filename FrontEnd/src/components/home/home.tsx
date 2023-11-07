@@ -5,38 +5,18 @@ import ProfileNavbar from '../profileNavbar/profileNavbar';
 import RoomCards from '../cards/roomCards';
 import RoomImagesHolder from '../roomImagesHolder/roomImagesHolder';
 import ImageUploader from '../imageUploader/imageUploader';
-
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 function Home(){
 
-   
+    const navigate = useNavigate();
     // Create a useState Constant to save selectedImages to upload as an Array of Strings
     const [selectedImages, setSelectedImages] = useState<string[]>([])
-    // Handle Uploaded Diles with ReactChangeEvent
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // Store the target Files in files const
-        const files = event.target.files;
-        //Check if files exists or not
-        if (files) {
-            // Create an Array to save immages urls and initialize it as an empty array
-            const imageUrls: string[] = [];
-            for (let file of files) {
-                const imageUrl = URL.createObjectURL(file);
-                imageUrls.push(imageUrl)
-            }
-            setSelectedImages((prevSelectedImages) => [...prevSelectedImages, ...imageUrls]);
-        }
-    };
-
     //Handle deleting a selected image and remove its url from the array
-    const handleDeleteImage = (imageUrl: string) => {
-        setSelectedImages((prevSelectedImages) =>
-            prevSelectedImages.filter((imgUrl) => imgUrl !== imageUrl)
-        );
-    };
+
+    function navigateShow(){
+        navigate('/slider');
+    }
 
     return <div className="homeContainer">
            <ProfileNavbar/>
@@ -55,6 +35,7 @@ function Home(){
                 <hr className="devideSelector"/>
                 </div>
             <RoomCards/>
+            <button className="play-btn" onClick={navigateShow}></button>
            </section>
             <ImageUploader/>
            <RoomImagesHolder/>

@@ -1,0 +1,20 @@
+.weatherWrapper{
+    display: flex;
+    justify-content: space-between;
+    height: fit-content;
+    background: transparent;
+}
+
+.weatherLocation{
+    font-size: 12px;
+    margin-left: 1%;
+}
+
+.weatherTemp{
+    font-size: 12px;
+}
+
+.weatherDesc{
+    font-size: 12px;
+    margin-right: 1%;
+}
