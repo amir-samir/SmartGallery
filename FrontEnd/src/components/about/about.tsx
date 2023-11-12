@@ -4,9 +4,10 @@ function About() {
     return <div className="aboutContainer">
                 <h1 className="aboutTitle">About Us!</h1>
                 <hr className="devideAbout"/>
-                <p className="aboutContent"> Lorem Ipsum is simply dummy text of the printing and 
-                typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
-                software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                <p className="aboutContent"> Welcome to Smart Memories, where we merge technology with memories.<br/>
+                Our product, the Interactive Picture Frame, is designed to bring your photos to life in a smart, context-aware way.<br/>
+                We believe in enhancing your home experience by dynamically displaying images based on time and current weather.<br/>
+                Driven by innovation and a passion for personalization</p>
                 <h2 className="supportContent">Our Software supports</h2>
                 <h3 className="devicesContent">Following Devices</h3>
                 <hr className="devideSupport"/>

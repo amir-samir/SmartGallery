@@ -92,17 +92,7 @@ function Contact() {
             />
           </fieldset>
     
-          <fieldset className="contact-form-group">
-            <label className="contact-label" htmlFor="formMessage">Message:</label>
-            <textarea
-              id="formMessage"
-              className="contact-form-textarea"
-              name="message"
-              required
-              onChange={handleChange}
-              value={formData.message}
-            />
-          </fieldset>
+ 
     
           <div className="contact-form-group">
             <input id="formButton" className="registrtationInputs contact-btn" type="submit" value="Send message" />

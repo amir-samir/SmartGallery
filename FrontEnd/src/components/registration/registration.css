@@ -30,6 +30,7 @@ label{
 	transition: .5s ease-in-out;
 }
 .registrtationInputs{
+	color: #000;
 	width: 60%;
 	height: 20px;
 	background: #e0dede;
