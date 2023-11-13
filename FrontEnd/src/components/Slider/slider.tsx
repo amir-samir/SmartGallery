@@ -59,7 +59,7 @@ function Slider() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleEsc = (event) => {
+    const handleEsc = (event: KeyboardEvent) => {
       // 27 ist keycode für ESC
       if (event.keyCode === 27) {
         navigate(-1);
@@ -72,7 +72,7 @@ function Slider() {
     return () => {
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [navigate]);
+ },[navigate]);
 
   return (
     <section>
