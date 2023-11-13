@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import HeroSlider, { AutoplayButton, Overlay, Slide } from "hero-slider";
 import { BackgroundProps } from "hero-slider/dist/components/Slide/Background";
+import { useNavigate } from "react-router-dom";
+
 import './slider.css'
 
 interface Image {
@@ -53,6 +55,24 @@ function Slider() {
 
     getImages();
   }, []);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      // 27 ist keycode für ESC
+      if (event.keyCode === 27) {
+        navigate(-1);
+      }
+    };
+
+    window.addEventListener("keydown", handleEsc);
+
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [navigate]);
 
   return (
     <section>
