@@ -1,11 +1,9 @@
 var Express = require("express");
 var cors = require("cors");
 var multer = require("multer");
-var MongoDBClient = require("mongodb").MongoClient; 
 var http = require("http")
 var mongoose = require("mongoose");
 const Grid = require('gridfs-stream');
-const GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
 
 require("./models/PhotosModel");
 const Images = mongoose.model("UploadedImages");
@@ -40,9 +38,10 @@ const upload = multer({ dest: 'uploads/' });
 
 
 
-
+//Import User Model
 const UserModel = require("./models/UserModel");
 
+//Post new User to MongoDB
 app.post("/registerUser", (req, res) => {
   const user = req.body;
   const db = mongoose.connection;
@@ -78,6 +77,8 @@ mongoose
  })
 .catch((err) => console.log(err));
 
+
+//Upload Images to MongoDB using base46
 app.post("/uploadImagesBase", async (req, res) => {
   const { images } = req.body;
   try {
@@ -95,6 +96,8 @@ app.post("/uploadImagesBase", async (req, res) => {
   }
 });
 
+
+//Get the Images from MongoDB
 app.get("/getImages", async (req, res) => {
   try {
     const images = await Images.find({});
@@ -105,6 +108,7 @@ app.get("/getImages", async (req, res) => {
   }
 });
 
+//Delete an image with specific ID
 app.delete("/deleteImage/:id", async (req, res) => {
   try {
     const imageId = req.params.id;

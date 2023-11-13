@@ -1,3 +1,4 @@
+//Cards to show compatable devices
 import { useEffect, useRef, useState } from 'react'
 import './devicesCards.css'
 

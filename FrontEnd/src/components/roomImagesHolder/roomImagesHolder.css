@@ -23,19 +23,11 @@
     padding: 0 2rem;
 }
 
-/* .hidden-delete-icon{
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-} */
 
 .room-images-gallery{
     display: flex;
     flex-wrap: wrap;
     margin: 1rem 1rem;
-    /* padding-bottom: 3rem; */
 }
 
 .room-images-gallery-item{
@@ -83,15 +75,7 @@
     color: white;
 }
 
-/* .room-image-gallery-loader{
-    width: 5rem;
-    height: 5rem;
-    border: 0.6rem solid #999;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    margin: 0 auto;
-    animation: loader 500ms linear infinite;
-} */
+
 
 
 @keyframes room-image-gallery-loader {

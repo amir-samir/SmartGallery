@@ -27,6 +27,7 @@ const weatherApi = {
 function Slider() {
   const [images, setImages] = useState<Image[]>([]);
   const [weatherInfo, setWeatherInfo] = useState<WeatherInfo | null>(null);
+  const [currentTime, setCurrentTime] = useState<string>("");
 
   // Fetch weather information and store it in state
   useEffect(() => {
@@ -37,6 +38,17 @@ function Slider() {
       });
   }, []);
 
+    // Update the current time every second
+    useEffect(() => {
+      const interval = setInterval(() => {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, "0");
+        const minutes = now.getMinutes().toString().padStart(2, "0");
+        setCurrentTime(`${hours}:${minutes}`);
+      }, 1000);
+  
+      return () => clearInterval(interval);
+    }, []);
   useEffect(() => {
     async function getImages() {
       try {
@@ -80,6 +92,7 @@ function Slider() {
       {weatherInfo && (
         <div className="weatherWrapper">
           <p className="weatherLocation">{weatherInfo.name}, {weatherInfo.sys?.country}</p>
+          <p className="currentTime">{currentTime}</p>
           <p className="weatherTemp">{weatherInfo.main?.temp} °C</p>
           <p className="weatherDesc">{weatherInfo.weather?.[0]?.description}</p>
         </div>

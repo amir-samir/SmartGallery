@@ -15,10 +15,6 @@ function Navbar() {
     <div className="container">
       <div className="logo">
       Smart Memories
-      {/* <img className="logo-img"
-           src='/smart-memories-logo.png'
-           alt="profile photo"
-        /> */}
       </div>
       <div className="menu-icon" onClick={handleShowNavBar}>
         <Hamburger />

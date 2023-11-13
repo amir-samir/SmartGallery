@@ -19,7 +19,9 @@ function RoomImagesHolder() {
       await fetch(`http://localhost:5083/deleteImage/${_id}`, {
         method: "DELETE",
       });
-      // You can also remove the image from your state to reflect the deletion.
+
+      // Remove the deleted image from the state
+      setImages(prevImages => prevImages.filter(img => img._id !== _id));
     } catch (error) {
       console.error("Error deleting image:", error);
     }

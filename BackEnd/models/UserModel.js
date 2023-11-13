@@ -1,3 +1,4 @@
+//Create Mongoose Schema to save Users in MongoDB
 var mongoose = require("mongoose");
 
 const userModel = new mongoose.Schema({

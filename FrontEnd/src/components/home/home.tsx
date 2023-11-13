@@ -1,3 +1,4 @@
+//Home
 import './home.css';
 import React, { useState } from 'react';
 import GalleryShow from '../galleryShow/galleryShow';

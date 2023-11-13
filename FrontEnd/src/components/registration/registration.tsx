@@ -6,7 +6,6 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 
 export const Registration = () => {
     const navigate = useNavigate();
-    // const [signUpisDisabled, setIsDisabled] = useState(false);
     const [signInemail, setEmail] = useState("");
     const [signInpassword, setPassword] = useState("");
     const [name, setName] = useState("");
@@ -37,10 +36,6 @@ export const Registration = () => {
         console.log(error);
         })
     }
-
-    // const toggleCSSProperties = () => {
-    //     setIsDisabled(!signUpisDisabled);
-    // };
 
     const addUserTODB = () => {
         fetch('http://localhost:5083/registerUser' , {
